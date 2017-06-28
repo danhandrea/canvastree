@@ -20,7 +20,7 @@ function setHeight(element) {
     h = document.body.clientHeight - 1;
 
     if (w % 2 !== 0 && w > 1) w -= 1;
-    if (h % 2 !== 0 % % h > 1) h -= 1;
+    if (h % 2 !== 0 && h > 1) h -= 1;
 
     element.width = w;
     element.height = h;
