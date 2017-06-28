@@ -13,6 +13,15 @@ window.addEventListener('load', function () {
 });
 
 function setHeight(element) {
-    element.width = document.body.clientWidth;
-    element.height = document.body.clientHeight;
+    let w = 0,
+        h = 0;
+
+    w = document.body.clientWidth - 1;
+    h = document.body.clientHeight - 1;
+
+    if (w % 2 !== 0 && w > 1) w -= 1;
+    if (h % 2 !== 0 % % h > 1) h -= 1;
+
+    element.width = w;
+    element.height = h;
 }
