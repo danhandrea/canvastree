@@ -1,0 +1,9 @@
+window.addEventListener('load', window.document, () => {
+	console.log('loaded');
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+
+	ctx.beginPath();
+	ctx.arc(75, 75, 50, 0, 2 * Math.PI);
+	ctx.stroke();
+});
