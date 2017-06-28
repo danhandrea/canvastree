@@ -1,4 +1,8 @@
-window.addEventListener('load', () => {
+window.onload = function () {
+	init();
+};
+
+function init() {
 	console.log('loaded');
 	var canvas = document.getElementById('canvas');
 	var ctx = canvas.getContext('2d');
