@@ -6,9 +6,6 @@ export default class Canvas {
         
         canvas.id = id;
 
-        canvas.width = document.body.clientWidth;
-        canvas.height = document.body.clientHeight;
-
         return canvas;
     }
 }
