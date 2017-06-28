@@ -1,49 +1,41 @@
-window.addEventListener('DOMContentLoaded', function () {
-	console.log('window - DOMContentLoaded - capture'); // 1st
-}, true);
-document.addEventListener('DOMContentLoaded', function () {
-	console.log('document - DOMContentLoaded - capture'); // 2nd
-}, true);
-document.addEventListener('DOMContentLoaded', function () {
-	console.log('document - DOMContentLoaded - bubble'); // 2nd
-});
-window.addEventListener('DOMContentLoaded', function () {
-	console.log('window - DOMContentLoaded - bubble'); // 3rd
-});
-
-window.addEventListener('load', function () {
-	console.log('window - load - capture'); // 4th
-}, true);
-document.addEventListener('load', function (e) {
-	/* Filter out load events not related to the document */
-	if (['style', 'script'].indexOf(e.target.tagName.toLowerCase()) < 0)
-		console.log('document - load - capture'); // DOES NOT HAPPEN
-}, true);
-document.addEventListener('load', function () {
-	console.log('document - load - bubble'); // DOES NOT HAPPEN
-});
 window.addEventListener('load', function () {
 	console.log('window - load - bubble'); // 4th
+	init();
 });
 
-window.onload = function () {
-	console.log('window - onload'); // 4th
-};
-document.onload = function () {
-	console.log('document - onload'); // DOES NOT HAPPEN
-};
-
-
-window.onload = function () {
-	init();
-};
-
 function init() {
-	console.log('loaded');
-	var canvas = document.getElementById('canvas');
-	var ctx = canvas.getContext('2d');
+	var ctx = canvas.getContext('2d'),
+		transX = canvas.width * 0.5,
+		transY = canvas.height * 0.5;
 
-	ctx.beginPath();
-	ctx.arc(75, 75, 50, 0, 2 * Math.PI);
-	ctx.stroke();
+	ctx.translate(transX, transY);
+
+	ctx.fillRect(0, -transY, 1, canvas.height);
+	ctx.fillRect(-transX, 0, canvas.width, 1);
+
+	var drawPoint = function (e) {
+		//ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.beginPath();
+		var pos = getMousePos(canvas, e);
+		ctx.arc(pos.x, pos.y, 20, 0, Math.PI * 2);
+		ctx.fill();
+	}
+
+	canvas.onmousemove = function (e) {
+		var pos = getMousePos(canvas, e);
+		out.innerHTML = 'X:' + pos.x + ' Y:' + pos.y;
+		out2.innerHTML = 'X:' + e.clientX + 'Y:' + e.clientY;
+	}
+
+	canvas.onclick = function (e) {
+		drawPoint(e);
+	}
+
+	function getMousePos(canvas, evt) {
+		var rect = canvas.getBoundingClientRect();
+		return {
+			x: evt.clientX - rect.left - transX,
+			y: evt.clientY - rect.top - transY
+		};
+	}
 }
