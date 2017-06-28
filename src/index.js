@@ -1,3 +1,5 @@
 import Canvas from './Canvas/index.js';
 
-document.body.appendChild(new Canvas().html('canvas'));
+window.addEventListener('load', function () {
+    document.body.appendChild(new Canvas().html('canvas'));
+});
