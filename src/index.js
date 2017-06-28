@@ -12,7 +12,7 @@ window.addEventListener('load', function () {
     document.body.appendChild(canvas);
 });
 
-setHeight(element) {
+function setHeight(element) {
     element.width = document.body.clientWidth;
     element.height = document.body.clientHeight;
 }
