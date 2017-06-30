@@ -50,7 +50,7 @@ export default class FTE {
         this.canvas.addEventListener('DOMMouseScroll', this.mouse.move.bind(this.mouse)); // fire fox
 
         this.canvas.addEventListener("contextmenu", function (e) {
-            this.canvas.preventDefault();
+            e.preventDefault();
         }, false);
     }
 
