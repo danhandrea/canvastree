@@ -1,7 +1,10 @@
-import Canvas from './Canvas/index.js';
+import FTE from './FTE/index.js';
 
-window.addEventListener('load', function () {
-    let canvas = new Canvas().html('canvas');
+var fte = new FTE();
 
-    document.body.appendChild(canvas);
+window.addEventListener('load', () => {
+    fte.init();
+    fte.update();
 });
+
+window.fte = fte;
