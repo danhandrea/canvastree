@@ -19,7 +19,7 @@ export default class DisplayTransform {
         this.dscale = 1;
         this.drotate = 0;
         this.drag = 0.1; // drag for movements
-        this.accel = 0.7; // acceleration
+        this.accel = 0.9; // acceleration
         this.matrix = [0, 0, 0, 0, 0, 0]; // main matrix
         this.invMatrix = [0, 0, 0, 0, 0, 0]; // invers matrix;
         this.mouseX = 0;
@@ -34,6 +34,9 @@ export default class DisplayTransform {
     }
     setHome() {
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+    }
+    convert(x, y) {
+
     }
     update(mouse) {
         // smooth all movement out. drag and accel control how this moves
@@ -98,12 +101,12 @@ export default class DisplayTransform {
                 // comment out the following is you change drag and accel
                 // and the zoom does not feel right (lagging and not 
                 // zooming around the mouse 
-                /*
+
                 this.cox = mouse.x;
                 this.coy = mouse.y;
                 this.cx = this.mouseX;
                 this.cy = this.mouseY;
-                */
+
                 if (mouse.w > 0) { // zoom in
                     this.scale *= 1.1;
                     mouse.w -= 20;
