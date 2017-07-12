@@ -1,5 +1,8 @@
-export default class Mouse {
+import EventEmitter from './eventEmitter.js';
+
+export default class Mouse extends EventEmitter {
     constructor() {
+        super();
         this.x = 0;
         this.y = 0;
         this.w = 0;
@@ -21,11 +24,21 @@ export default class Mouse {
         this.alt = event.altKey;
         this.shift = event.shiftKey;
         this.ctrl = event.ctrlKey;
+
+
+        if (event.type === "mousemove" && this.buttonLastRaw === 1) {
+            this.emit('drag', event);
+        }
+
         if (event.type === "mousedown") {
             event.preventDefault()
             this.buttonRaw |= this.buttons[event.which - 1];
         } else if (event.type === "mouseup") {
             this.buttonRaw &= this.buttons[event.which + 2];
+            this.emit('dragend', event);
+            if (this.buttonLastRaw === 1) {
+                this.emit('click', event);
+            }
         } else if (event.type === "mouseout") {
             this.buttonRaw = 0;
             this.over = false;
@@ -37,5 +50,6 @@ export default class Mouse {
         } else if (event.type === "DOMMouseScroll") { // FF you pedantic doffus
             this.w = -event.detail;
         }
+        this.buttonLastRaw = this.buttonRaw;
     }
 }

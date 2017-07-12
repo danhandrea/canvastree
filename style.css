@@ -9,9 +9,24 @@ body {
 body {
     background-color: antiquewhite;
 }
+
 body {
     overflow: hidden;
 }
+
 canvas {
-    cursor: none;
+    /*cursor: none;*/
+}
+
+canvas.drag {
+    /*cursor:dr*/
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+}
+
+.help {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-color: transparent;
 }

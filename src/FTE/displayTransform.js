@@ -1,3 +1,5 @@
+import Point from '../family/point.js';
+
 export default class DisplayTransform {
     constructor(ctx) {
         this.x = 0;
@@ -32,12 +34,11 @@ export default class DisplayTransform {
         var i = 0;
         this.ctx.setTransform(m[i++], m[i++], m[i++], m[i++], m[i++], m[i++]);
     }
+    
     setHome() {
         this.ctx.setTransform(1, 0, 0, 1, 0, 0);
     }
-    convert(x, y) {
-
-    }
+   
     update(mouse) {
         // smooth all movement out. drag and accel control how this moves
         // acceleration 
@@ -83,13 +84,15 @@ export default class DisplayTransform {
         // check for mouse. Do controls and get real position of mouse.
         if (mouse !== undefined) { // if there is a mouse get the real cavas coordinates of the mouse
             if (mouse.oldX !== undefined && (mouse.buttonRaw & 1) === 1) { // check if panning (middle button)
-                var mdx = mouse.x - mouse.oldX; // get the mouse movement
-                var mdy = mouse.y - mouse.oldY;
-                // get the movement in real space
-                var mrx = (mdx * this.invMatrix[0] + mdy * this.invMatrix[2]);
-                var mry = (mdx * this.invMatrix[1] + mdy * this.invMatrix[3]);
-                this.x -= mrx;
-                this.y -= mry;
+                if (mouse.shift) {
+                    var mdx = mouse.x - mouse.oldX; // get the mouse movement
+                    var mdy = mouse.y - mouse.oldY;
+                    // get the movement in real space
+                    var mrx = (mdx * this.invMatrix[0] + mdy * this.invMatrix[2]);
+                    var mry = (mdx * this.invMatrix[1] + mdy * this.invMatrix[3]);
+                    this.x -= mrx;
+                    this.y -= mry;
+                }
             }
             // do the zoom with mouse wheel
             if (mouse.w !== undefined && mouse.w !== 0) {

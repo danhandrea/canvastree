@@ -1,0 +1,12 @@
+{
+  "name": "canvastree",
+  "version": "0.1.0",
+  "description": "canvas tree",
+  "main": "src/index.js",
+  "repository": "https://github.com/danhandrea/canvastree.git",
+  "author": "Dan Handrea <handrea.dan@gmail.com>",
+  "license": "BSD",
+  "scripts": {
+    "start": "light-server -s . -p 7000 -w \"**/*.js, index.html\""
+  }
+}
