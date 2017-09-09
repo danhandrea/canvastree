@@ -8,5 +8,8 @@
   "license": "BSD",
   "scripts": {
     "start": "light-server -s . -p 7000 -w \"**/*.js, index.html\""
+  },
+  "devDependencies": {
+    "light-server": "^2.2.1"
   }
 }
